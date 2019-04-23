@@ -4,23 +4,23 @@ services:
   - docker
 
 before_install:
-  - docker build -t I028929/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t german-mesa/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run I028929/react-test npm test -- --coverage
+  - docker run german-mesa/react-test npm test -- --coverage
 
 after_success:
   # Build productive images
-  - docker build -t I028929/multi-client ./client
-  - docker build -t I028929/multi-nginx ./nginx
-  - docker build -t I028929/multi-postgres ./postgres
-  - docker build -t I028929/multi-server ./server
-  - docker build -t I028929/multi-worker ./worker
+  - docker build -t german-mesa/multi-client ./client
+  - docker build -t german-mesa/multi-nginx ./nginx
+  - docker build -t german-mesa/multi-postgres ./postgres
+  - docker build -t german-mesa/multi-server ./server
+  - docker build -t german-mesa/multi-worker ./worker
   # Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   #Take those images and push to github
-  - docker push I028929/multi-client
-  - docker push I028929/multi-nginx
-  - docker push I028929/multi-postgres    
-  - docker push I028929/multi-server
-  - docker push I028929/multi-worker  
+  - docker push german-mesa/multi-client
+  - docker push german-mesa/multi-nginx
+  - docker push german-mesa/multi-postgres    
+  - docker push german-mesa/multi-server
+  - docker push german-mesa/multi-worker  
